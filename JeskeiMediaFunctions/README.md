@@ -400,3 +400,4 @@ Or
  ```
 
 More functions are being added including integration of Azure Media Digital Rights Management, live streaming and more media management functions.
+These functions are publicly accessible but will soon require a payment tx when uploading content.
