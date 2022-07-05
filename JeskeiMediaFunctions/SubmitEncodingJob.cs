@@ -144,7 +144,7 @@ namespace JeskeiMediaFunctions
             try
             {
                 // Ensure that you have the encoding Transform.  This is really a one time setup operation.
-                transform = await TransformUtils.CreateEncodingTransform(client, log, config.ResourceGroup, config.AccountName, data.TransformName, data.BuiltInPreset);
+                transform = await TransformUtils.CreateEncodingTransform(client, log, config.ResourceGroup, config.AccountName, data.transformName, data.builtInPreset);
                 log.LogInformation("Transform retrieved.");
             }
             catch (ErrorResponseException ex)
@@ -156,7 +156,7 @@ namespace JeskeiMediaFunctions
             try
             {
                 // Output from the job must be written to an Asset, so let's create one
-                outputAsset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, outputAssetName, data.OutputAssetStorageAccount);
+                outputAsset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, outputAssetName, data.outputAssetStorageAccount);
                 log.LogInformation($"Output asset '{outputAssetName}' created.");
             }
             catch (ErrorResponseException ex)
@@ -176,8 +176,8 @@ namespace JeskeiMediaFunctions
             }
             else
             {
-                jobInput = new JobInputAsset(assetName: data.InputAssetName);
-                log.LogInformation($"Input is asset '{data.InputAssetName}'.");
+                jobInput = new JobInputAsset(assetName: data.inputAssetName);
+                log.LogInformation($"Input is asset '{data.inputAssetName}'.");
             }
 
             Job job;
@@ -189,7 +189,7 @@ namespace JeskeiMediaFunctions
                                            log,
                                            config.ResourceGroup,
                                            config.AccountName,
-                                           data.TransformName,
+                                           data.transformName,
                                            jobName,
                                            jobInput,
                                            outputAssetName

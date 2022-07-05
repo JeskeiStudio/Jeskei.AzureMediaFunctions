@@ -175,7 +175,7 @@ namespace JeskeiMediaFunctions
 
             Guid streamingLocatorId = Guid.NewGuid();
             if (data.StreamingLocatorId != null)
-                streamingLocatorId = new Guid((string)(data.StreamingLocatorId));
+                streamingLocatorId = new Guid((string)(data.streamingLocatorId));
             string streamingLocatorName = "streaminglocator-" + streamingLocatorId.ToString();
 
             StreamingPolicy streamingPolicy;
@@ -203,7 +203,7 @@ namespace JeskeiMediaFunctions
                 return new BadRequestObjectResult("Error when getting streaming policy.");
             }
 
-            if (data.ContentKeyPolicyName != null)
+            if (data.contentKeyPolicyName != null)
             {
                 ContentKeyPolicy contentKeyPolicy = null;
                 try
@@ -218,22 +218,22 @@ namespace JeskeiMediaFunctions
                 }
             }
 
-            if (data.ContentKeys != null)
+            if (data.contentKeys != null)
             {
                 JsonConverter[] jsonConverters = {
                         new MediaServicesHelperJsonReader()
                     };
-                contentKeys = JsonConvert.DeserializeObject<List<StreamingLocatorContentKey>>(data.ContentKeys.ToString(), jsonConverters);
+                contentKeys = JsonConvert.DeserializeObject<List<StreamingLocatorContentKey>>(data.contentKeys.ToString(), jsonConverters);
             }
 
             var streamingLocator = new StreamingLocator()
             {
-                AssetName = data.AssetName,
-                StreamingPolicyName = data.StreamingPolicyName,
-                DefaultContentKeyPolicyName = data.ContentKeyPolicyName,
+                AssetName = data.assetName,
+                StreamingPolicyName = data.streamingPolicyName,
+                DefaultContentKeyPolicyName = data.contentKeyPolicyName,
                 StreamingLocatorId = streamingLocatorId,
-                StartTime = data.StartDateTime,
-                EndTime = data.EndDateTime
+                StartTime = data.startDateTime,
+                EndTime = data.endDateTime
             };
 
             if (contentKeys.Count != 0)

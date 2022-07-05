@@ -87,12 +87,12 @@ namespace JeskeiMediaFunctions
 
 
             // Return bad request if input asset name is not passed in
-            if (data.LiveEventName == null || data.LiveOutputName == null)
+            if (data.liveEventName == null || data.liveOutputName == null)
             {
                 return new BadRequestObjectResult("Please pass liveEventName and liveOutputName in the request body");
             }
 
-            data.IntervalSec ??= 60;
+            data.intervalSec ??= 60;
 
             ConfigWrapper config = ConfigUtils.GetConfig();
 
@@ -148,18 +148,18 @@ namespace JeskeiMediaFunctions
 
             log.LogInformation($"Livetime : {livetime}");
 
-            var starttime = LiveManifest.ReturnTimeSpanOnGOP(assetmanifestdata, livetime.Subtract(TimeSpan.FromSeconds((int)data.IntervalSec)));
+            var starttime = LiveManifest.ReturnTimeSpanOnGOP(assetmanifestdata, livetime.Subtract(TimeSpan.FromSeconds((int)data.intervalSec)));
             log.LogInformation($"Value starttime : {starttime}");
 
-            if (data.LastSubclipEndTime != null)
+            if (data.lastSubclipEndTime != null)
             {
-                var lastEndTime = (TimeSpan)data.LastSubclipEndTime;
+                var lastEndTime = (TimeSpan)data.lastSubclipEndTime;
                 log.LogInformation($"Value lastEndTime : {lastEndTime}");
 
-                var delta = (livetime - lastEndTime - TimeSpan.FromSeconds((int)data.IntervalSec)).Duration();
+                var delta = (livetime - lastEndTime - TimeSpan.FromSeconds((int)data.intervalSec)).Duration();
                 log.LogInformation($"Delta: {delta}");
 
-                if (delta < (TimeSpan.FromSeconds(3 * (int)data.IntervalSec))) // less than 3 times the normal duration (3*60s)
+                if (delta < (TimeSpan.FromSeconds(3 * (int)data.intervalSec))) // less than 3 times the normal duration (3*60s)
                 {
                     starttime = lastEndTime;
                     log.LogInformation($"Value new starttime : {starttime}");
@@ -177,7 +177,7 @@ namespace JeskeiMediaFunctions
             try
             {
                 // Output from the Job must be written to an Asset, so let's create one
-                outputAsset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, liveOutput.Name + "-subclip-" + triggerStart, data.OutputAssetStorageAccount);
+                outputAsset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, liveOutput.Name + "-subclip-" + triggerStart, data.outputAssetStorageAccount);
             }
             catch (ErrorResponseException ex)
             {

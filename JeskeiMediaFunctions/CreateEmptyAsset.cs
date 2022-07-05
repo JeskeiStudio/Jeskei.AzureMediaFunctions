@@ -117,14 +117,14 @@ namespace JeskeiMediaFunctions
             // Creating a unique suffix so that we don't have name collisions if you run the sample
             // multiple times without cleaning up.
             string uniqueness = Guid.NewGuid().ToString().Substring(0, 13);
-            string assetName = $"{data.AssetOwnerAddress}-{uniqueness}";
+            string assetName = $"{data.assetOwnerAddress}-{uniqueness}";
 
             Asset asset;
 
             try
             {
                 // let's create the asset
-                asset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, assetName, data.AssetStorageAccount, data.AssetDescription);
+                asset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, assetName, data.assetStorageAccount, data.assetDescription);
                 log.LogInformation($"Asset '{assetName}' created.");
             }
             catch (ErrorResponseException ex)
