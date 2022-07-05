@@ -46,7 +46,7 @@ For more on information on .NET 6 & Azure Functions, see [this repository](https
 
 Create a **.env file** at the root with your account settings.
 
-Use [`sample.env`](../sample.env) as a template for the .env file to be created. The .env file must be placed at the root of the project (same location than sample.env).
+Use [`sample.env`](JeskeiMediaFunctions/sample.env) as a template for the .env file to be created. The .env file must be placed at the root of the project (same location than sample.env).
 Connect to the Azure portal with your browser and go to your media services account / API access to get the .ENV data to store to the .env file.
 
 When running the functions locally, they will authenticate automatically using your credentials. To use a Service Principal, add the following entries with the right values to the `.env` file:  
@@ -67,7 +67,7 @@ When using VS Code, you can launch the Functions in the Debugger console (Ctrl-s
 
 Use Postman to test your local functions.
 
-![Screen capture](../Images/azfunc5postman.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5postman.png?raw=true)
 
 ## How to deploy the functions to Azure
 
@@ -82,11 +82,11 @@ For Azure CLI commands, read [this](https://github.com/Azure/azure-functions-dot
 
 With VS Code, select the Azure tab and click on the icon to deploy it to Azure.
 
-![Screen capture](../Images/azfunc5deploy.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5deploy.png?raw=true)
 
 Once the deployment is done, to get the function Url, use the Functions explorer in VSCode, or the Azure portal.
 
-![Screen capture](../Images/azfunc5geturl.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5geturl.png?raw=true)
 
 More details in the [documentation](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process#sign-in-to-azure).
 
@@ -132,7 +132,7 @@ Once deployed, go the Azure portal, select your Azure functions app, go to the '
 
 These application settings are used by the functions to connect to your Media Services account.
 
-![Screen capture](../Images/azfunc5deployappsettings.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5deployappsettings.png?raw=true)
 
 #### If a Service Principal is used
 
@@ -160,7 +160,7 @@ Add these two entries in the configuration of the Azure Function app (and replac
 - Select `Function App` in the box `Assign access to`
 - You should see your Function app name. Select it and select `Save`.
 
-![Screen capture](../Images/azfunc5roleassignment.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5roleassignment.png?raw=true)
 
 - If you want to operate Live Events with your functions, repeat the previous steps to add role `Media Services Live Events Administrator`.
 
@@ -170,7 +170,7 @@ Restart the Function App.
 
 You can use Postman to test your Azure functions.
 
-![Screen capture](../Images/azfunc5postmandeployed.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5postmandeployed.png?raw=true)
 
 ### Option (B): deploy using an ARM template and GitHub Actions
 
@@ -297,21 +297,21 @@ jobs:
 
 Note : This script installs two versions of .NET and asks the engine to deploy the code from the `/Functions` folder of the repo.
 
-![Screen capture](../Images/azfunc5githubactions.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5githubactions.png?raw=true)
 
 Check the status of the workflow in GitHub Actions. If everything worked fine, you should see the functions in the portal.
 
-![Screen capture](../Images/azfunc5appinstance.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5appinstance.png?raw=true)
 
 #### (B.5) Test the functions
 
 In the portal, you can now get the URLs for your functions.
 
-![Screen capture](../Images/azfunc5geturlportal.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5geturlportal.png?raw=true)
 
 Run Postman to test your Azure functions.
 
-![Screen capture](../Images/azfunc5postmandeployed.png?raw=true)
+![Screen capture](JeskeiMediaFunctions/Images/azfunc5postmandeployed.png?raw=true)
 
 For more information on this type of deployment, see [GitHub Actions for deploying to Azure Functions](https://github.com/Azure/functions-action).
 
@@ -400,4 +400,7 @@ Or
  ```
 
 More functions are being added including integration of Azure Media Digital Rights Management, live streaming and more media management functions.
+<<<<<<< HEAD:JeskeiMediaFunctions/README.md
 These functions are publicly accessible but will soon require a payment tx when uploading content.
+=======
+>>>>>>> 36778f484b2df5b6e510ec2c910bc62a5416136a:README.md
