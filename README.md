@@ -400,7 +400,4 @@ Or
  ```
 
 More functions are being added including integration of Azure Media Digital Rights Management, live streaming and more media management functions.
-<<<<<<< HEAD:JeskeiMediaFunctions/README.md
 These functions are publicly accessible but will soon require a payment tx when uploading content.
-=======
->>>>>>> 36778f484b2df5b6e510ec2c910bc62a5416136a:README.md
