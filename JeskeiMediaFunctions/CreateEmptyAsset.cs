@@ -86,12 +86,12 @@ namespace JeskeiMediaFunctions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             assetOwnerAddress = assetOwnerAddress ?? data?.assetOwnerAddress;
-
+            /*
             if (assetOwnerAddress == null)
             {
                 return new OkObjectResult("Please pass assetOwnerAddress in the request body");
             }
-
+            */
             ConfigWrapper config = ConfigUtils.GetConfig();
             return new OkObjectResult(config.ToString());
 
