@@ -86,12 +86,12 @@ namespace JeskeiMediaFunctions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             assetOwnerAddress = assetOwnerAddress ?? data?.assetOwnerAddress;
-
+/*
             if (assetOwnerAddress == null)
             {
                 return new OkObjectResult("Please pass assetOwnerAddress in the request body");
             }
-
+*/
             ConfigWrapper config = ConfigUtils.GetConfig();
 
             IAzureMediaServicesClient client;
@@ -109,7 +109,7 @@ namespace JeskeiMediaFunctions
                 log.LogError($"{e.Message}");
                 return new BadRequestObjectResult(e.Message);
             }
-
+            return new OkObjectResult("Test point 1");
             // Set the polling interval for long running operations to 2 seconds.
             // The default value is 30 seconds for the .NET client SDK
             client.LongRunningOperationRetryTimeout = 2;
