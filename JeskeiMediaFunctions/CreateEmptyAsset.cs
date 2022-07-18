@@ -86,17 +86,18 @@ namespace JeskeiMediaFunctions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             assetOwnerAddress = assetOwnerAddress ?? data?.assetOwnerAddress;
-
-            ConfigWrapper config = ConfigUtils.GetConfig();
-
+/*
             if (assetOwnerAddress == null)
             {
                 return new OkObjectResult("Please pass assetOwnerAddress in the request body");
             }
+*/
+            ConfigWrapper config = ConfigUtils.GetConfig();
 
             IAzureMediaServicesClient client;
             try
             {
+                return new OkObjectResult("Test Point 1");
                 client = await Authentication.CreateMediaServicesClientAsync(config);
                 log.LogInformation("AMS Client created.");
             }
