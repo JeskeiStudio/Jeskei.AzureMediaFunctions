@@ -109,7 +109,7 @@ namespace JeskeiMediaFunctions
                 log.LogError($"{e.Message}");
                 return new BadRequestObjectResult(e.Message);
             }
-            return new OkObjectResult("Test point 1");
+            
             // Set the polling interval for long running operations to 2 seconds.
             // The default value is 30 seconds for the .NET client SDK
             client.LongRunningOperationRetryTimeout = 2;
@@ -132,7 +132,7 @@ namespace JeskeiMediaFunctions
                 log.LogInformation(ex.Message);
                 return new BadRequestObjectResult("Error when creating the asset.");
             }
-
+            return new OkObjectResult("Test point 1");
             try
             {
                 // let's get the asset to have full metadata like container
