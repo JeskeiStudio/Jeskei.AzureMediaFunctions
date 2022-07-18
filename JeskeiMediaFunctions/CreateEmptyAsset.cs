@@ -93,7 +93,7 @@ namespace JeskeiMediaFunctions
             }
             */
             ConfigWrapper config = ConfigUtils.GetConfig();
-            return new OkObjectResult(config.ToString());
+            return new OkObjectResult(config.AccountName.ToString());
 
             IAzureMediaServicesClient client;
             try
