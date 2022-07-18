@@ -93,8 +93,7 @@ namespace JeskeiMediaFunctions
             }
             */
             ConfigWrapper config = ConfigUtils.GetConfig();
-            return new OkObjectResult(config.AccountName.ToString());
-
+            
             IAzureMediaServicesClient client;
             try
             {
@@ -110,6 +109,8 @@ namespace JeskeiMediaFunctions
                 log.LogError($"{e.Message}");
                 return new BadRequestObjectResult(e.Message);
             }
+
+            return new OkObjectResult(config.AccountName.ToString());
 
             // Set the polling interval for long running operations to 2 seconds.
             // The default value is 30 seconds for the .NET client SDK
