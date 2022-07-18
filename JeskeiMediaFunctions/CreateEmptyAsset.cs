@@ -93,11 +93,11 @@ namespace JeskeiMediaFunctions
             }
 
             ConfigWrapper config = ConfigUtils.GetConfig();
+            return new OkObjectResult(config.ToString());
 
             IAzureMediaServicesClient client;
             try
             {
-                return new OkObjectResult(config.ToString());
                 client = await Authentication.CreateMediaServicesClientAsync(config);
                 log.LogInformation("AMS Client created.");
             }
