@@ -97,8 +97,8 @@ namespace JeskeiMediaFunctions
             IAzureMediaServicesClient client;
             try
             {
-                return new OkObjectResult("Test Point 1");
                 client = await Authentication.CreateMediaServicesClientAsync(config);
+                return new OkObjectResult("Test Point 1");
                 log.LogInformation("AMS Client created.");
             }
             catch (Exception e)
