@@ -126,9 +126,10 @@ namespace JeskeiMediaFunctions
             
             try
             {
+                return new OkObjectResult("config.ResourceGroup: " + config.ResourceGroup + ", config.AccountName: " + config.AccountName + ", assetName: " + assetName + ", data.assetStorageAccount: " + data.assetStorageAccount + ", data.assetDescription: " + data.assetDescription);
                 // let's create the asset
                 asset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, assetName, data.assetStorageAccount, data.assetDescription);
-                return new OkObjectResult("Test point 1");
+                
                 log.LogInformation($"Asset '{assetName}' created.");
             }
             catch (ErrorResponseException ex)
