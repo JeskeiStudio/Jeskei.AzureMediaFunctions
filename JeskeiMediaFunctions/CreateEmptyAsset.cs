@@ -136,6 +136,8 @@ namespace JeskeiMediaFunctions
             }
             catch (ErrorResponseException ex)
             {
+                return new OkObjectResult(ex.Message);
+
                 log.LogInformation(ex.Message);
                 return new BadRequestObjectResult("Error when creating the asset.");
             }
