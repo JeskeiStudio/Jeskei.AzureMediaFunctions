@@ -121,13 +121,14 @@ namespace JeskeiMediaFunctions
             
 
             string assetName = $"{data.assetOwnerAddress}-{uniqueness}";
-            return new OkObjectResult("Test point 1");
+            
             Asset asset;
             
             try
             {
                 // let's create the asset
                 asset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, assetName, data.assetStorageAccount, data.assetDescription);
+                return new OkObjectResult("Test point 1");
                 log.LogInformation($"Asset '{assetName}' created.");
             }
             catch (ErrorResponseException ex)
