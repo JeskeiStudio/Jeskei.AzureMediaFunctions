@@ -120,7 +120,7 @@ namespace JeskeiMediaFunctions
             string assetName = $"{data.assetOwnerAddress}-{uniqueness}";
 
             Asset asset;
-
+            return new OkObjectResult("Test point 1");
             try
             {
                 // let's create the asset
@@ -132,7 +132,7 @@ namespace JeskeiMediaFunctions
                 log.LogInformation(ex.Message);
                 return new BadRequestObjectResult("Error when creating the asset.");
             }
-            return new OkObjectResult("Test point 1");
+            
             try
             {
                 // let's get the asset to have full metadata like container
