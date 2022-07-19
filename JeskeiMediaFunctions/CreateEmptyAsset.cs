@@ -118,10 +118,10 @@ namespace JeskeiMediaFunctions
             // multiple times without cleaning up.
             string uniqueness = Guid.NewGuid().ToString().Substring(0, 13);
 
-            return new OkObjectResult("Test point 1");
+            
 
             string assetName = $"{data.assetOwnerAddress}-{uniqueness}";
-
+            return new OkObjectResult("Test point 1");
             Asset asset;
             
             try
