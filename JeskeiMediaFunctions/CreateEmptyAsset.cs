@@ -113,10 +113,13 @@ namespace JeskeiMediaFunctions
             // Set the polling interval for long running operations to 2 seconds.
             // The default value is 30 seconds for the .NET client SDK
             client.LongRunningOperationRetryTimeout = 2;
-            return new OkObjectResult("Test point 1");
+            
             // Creating a unique suffix so that we don't have name collisions if you run the sample
             // multiple times without cleaning up.
             string uniqueness = Guid.NewGuid().ToString().Substring(0, 13);
+
+            return new OkObjectResult("Test point 1");
+
             string assetName = $"{data.assetOwnerAddress}-{uniqueness}";
 
             Asset asset;
