@@ -126,12 +126,11 @@ namespace JeskeiMediaFunctions
             
             try
             {
-                return new OkObjectResult("client.BaseUri: " + client.BaseUri + ", client.SubscriptionId: " + client.SubscriptionId);
                 // let's create the asset
                 asset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, assetName, data.assetStorageAccount, data.assetDescription);
 
 
-                
+                return new OkObjectResult("client.BaseUri: " + client.BaseUri + ", client.SubscriptionId: " + client.SubscriptionId);
 
                 log.LogInformation($"Asset '{assetName}' created.");
             }
