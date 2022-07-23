@@ -86,12 +86,12 @@ namespace JeskeiMediaFunctions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             assetOwnerAddress = assetOwnerAddress ?? data?.assetOwnerAddress;
-/*
+
             if (assetOwnerAddress == null)
             {
                 return new OkObjectResult("Please pass assetOwnerAddress in the request body");
             }
-*/
+
             ConfigWrapper config = ConfigUtils.GetConfig();
 
             IAzureMediaServicesClient client;
@@ -118,8 +118,6 @@ namespace JeskeiMediaFunctions
             // multiple times without cleaning up.
             string uniqueness = Guid.NewGuid().ToString().Substring(0, 13);
 
-            
-
             string assetName = $"{data.assetOwnerAddress}-{uniqueness}";
             
             Asset asset;
@@ -127,17 +125,12 @@ namespace JeskeiMediaFunctions
             try
             {
                 // let's create the asset
-                asset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, assetName, data.assetStorageAccount, data.assetDescription);
-
-
-                return new OkObjectResult("client.BaseUri: " + client.BaseUri + ", client.SubscriptionId: " + client.SubscriptionId);
+                asset = await AssetUtils.CreateAssetAsync(client, log, config.ResourceGroup, config.AccountName, assetName);
 
                 log.LogInformation($"Asset '{assetName}' created.");
             }
             catch (ErrorResponseException ex)
             {
-                return new OkObjectResult(ex.Message);
-
                 log.LogInformation(ex.Message);
                 return new BadRequestObjectResult("Error when creating the asset.");
             }
