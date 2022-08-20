@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using Microsoft.Azure.Management.Media;
 using Microsoft.Azure.Management.Media.Models;
 using Common_Utils;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.Linq;
 
 namespace JeskeiMediaFunctions
 {
@@ -33,6 +35,12 @@ namespace JeskeiMediaFunctions
             /// </summary>
             [JsonProperty("assetOwnerSignature")]
             public string AssetOwnerSignature { get; set; }
+
+            /// <summary>
+            /// Asset name
+            /// </summary>
+            [JsonProperty("assetName")]
+            public string AssetName { get; set; }
 
             /// <summary>
             /// Asset description
@@ -71,8 +79,13 @@ namespace JeskeiMediaFunctions
             /// </summary>
             [JsonProperty("container")]
             public string Container { get; set; }
-        }
 
+            /// <summary>
+            /// Uri for uploading blob
+            /// </summary>
+            [JsonProperty("sasUri")]
+            public Uri SasUri { get; set; }
+        }
 
         [FunctionName("CreateEmptyAsset")]
         public static async Task<IActionResult> Run(
@@ -81,13 +94,10 @@ namespace JeskeiMediaFunctions
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string assetOwnerAddress = req.Query["assetOwnerAddress"];
-
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
-            assetOwnerAddress = assetOwnerAddress ?? data?.assetOwnerAddress;
 
-            if (assetOwnerAddress == null)
+            if (data?.assetOwnerAddress == null)
             {
                 return new OkObjectResult("Please pass assetOwnerAddress in the request body");
             }
@@ -118,7 +128,7 @@ namespace JeskeiMediaFunctions
             // multiple times without cleaning up.
             string uniqueness = Guid.NewGuid().ToString().Substring(0, 13);
 
-            string assetName = $"{data.assetOwnerAddress}-{uniqueness}";
+            string assetName = $"{data.assetOwnerAddress}-{uniqueness}_{data.assetName}";
             
             Asset asset;
             
@@ -146,11 +156,21 @@ namespace JeskeiMediaFunctions
                 return new BadRequestObjectResult("Error when getting the created asset.");
             }
 
+            var response = client.Assets.ListContainerSas(config.ResourceGroup,
+                                                          config.AccountName,
+                                                          assetName,
+                                                          permissions: AssetContainerPermission.ReadWrite,
+                                                          expiryTime: DateTime.UtcNow.AddHours(24).ToUniversalTime());
+
+            var sasUri = new Uri(response.AssetContainerSasUrls.First());
+
+
             AnswerBodyModel dataOk = new()
             {
                 AssetName = asset.Name,
                 AssetId = asset.AssetId,
-                Container = asset.Container
+                Container = asset.Container,
+                SasUri = sasUri
             };
 
             return new OkObjectResult(dataOk);
