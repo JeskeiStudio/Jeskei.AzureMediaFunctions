@@ -90,7 +90,7 @@ namespace JeskeiMediaFunctions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
 
-            if (data?.assetOwnerAddress == null || "0x0000000000000000000000000000000000000000")
+            if (data?.assetOwnerAddress == null || data?.assetOwnerAddress == "0x0000000000000000000000000000000000000000")
             {
                 return new OkObjectResult("Please pass assetOwnerAddress in the request body");
             }
