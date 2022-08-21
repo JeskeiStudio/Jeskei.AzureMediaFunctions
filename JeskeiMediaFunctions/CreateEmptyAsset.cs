@@ -48,13 +48,6 @@ namespace JeskeiMediaFunctions
             /// </summary>
             [JsonProperty("assetDescription")]
             public string AssetDescription { get; set; }
-
-            /// <summary>
-            /// Name of the attached storage account to use for the asset.
-            /// Optional.
-            /// </summary>
-            [JsonProperty("assetStorageAccount")]
-            public string AssetStorageAccount { get; set; }
         }
 
         /// <summary>
@@ -97,7 +90,7 @@ namespace JeskeiMediaFunctions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
 
-            if (data?.assetOwnerAddress == null)
+            if (data?.assetOwnerAddress == null || "0x0000000000000000000000000000000000000000")
             {
                 return new OkObjectResult("Please pass assetOwnerAddress in the request body");
             }
