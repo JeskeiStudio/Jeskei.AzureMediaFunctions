@@ -4,9 +4,9 @@ platforms: dotnetcore
 author: TheNewAutonomy
 ---
 
-# .NET 6 Functions for Azure Media Services v3
+# .NET 8 Functions for Azure Media Services v3
 
-This project contains Azure Functions that connect to Azure Media Services v3 for video processing. Functions are developped using C# and .NET 6.
+This project contains Azure Functions that connect to Azure Media Services v3 for video processing. Functions are developped using C# and .NET 8.
 You can use Visual Studio 2022 or Visual Studio Code to run and deploy them to Azure.
 
 There are several functions and more will be added in the future. As an example, the **SubmitEncodingJob** function takes a Media Services asset or a source URL and launches an encoding job with Media Services. It uses a Transform which is created if it does not exist. When it is created, it used the preset provided in the input body.
@@ -31,8 +31,8 @@ To enable streaming, go to the Azure portal, select the Azure Media Services acc
 
 ### 4. Install VS Code or Visual Studio
 
-- Install [Visual Studio Code](https://code.visualstudio.com/) or [Visual Studio 2019](https://visualstudio.microsoft.com/).
-- [.NET 6.0 SDKs](https://dotnet.microsoft.com/download/dotnet).
+- Install [Visual Studio Code](https://code.visualstudio.com/) or [Visual Studio 2022](https://visualstudio.microsoft.com/).
+- [.NET 8.0 SDKs](https://dotnet.microsoft.com/download/dotnet).
 - The [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) for Visual Studio Code.
 
 ## .NET solution file and how to launch project
